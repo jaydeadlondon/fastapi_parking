@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [ "**" ]
+  pull_request:
+    branches: [ "**" ]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        cd fastapi_parking
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install flake8 black isort mypy
+
+    - name: Run flake8
+      run: cd fastapi_parking && flake8 .
+
+    - name: Run black
+      run: cd fastapi_parking && black --check .
+
+    - name: Run isort
+      run: cd fastapi_parking && isort --check-only .
+
+    - name: Run mypy
+      run: cd fastapi_parking && mypy .
+
+    - name: Run tests
+      run: cd fastapi_parking && pytest
