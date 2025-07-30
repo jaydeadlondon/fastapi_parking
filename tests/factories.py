@@ -1,9 +1,11 @@
+import random
+
 import factory
 from faker import Faker
 from module_30_ci_linters.homework.hw1.fastapi_parking.app.models import Client, Parking
-import random
 
-fake = Faker('ru_RU')
+fake = Faker("ru_RU")
+
 
 class ClientFactory(factory.Factory):
     class Meta:
@@ -11,8 +13,11 @@ class ClientFactory(factory.Factory):
 
     name = factory.LazyAttribute(lambda x: fake.first_name())
     surname = factory.LazyAttribute(lambda x: fake.last_name())
-    credit_card = factory.LazyAttribute(lambda x: fake.credit_card_number() if random.choice([True, False]) else None)
-    car_number = factory.LazyAttribute(lambda x: fake.bothify(text='?###??##'))
+    credit_card = factory.LazyAttribute(
+        lambda x: fake.credit_card_number() if random.choice([True, False]) else None
+    )
+    car_number = factory.LazyAttribute(lambda x: fake.bothify(text="?###??##"))
+
 
 class ParkingFactory(factory.Factory):
     class Meta:

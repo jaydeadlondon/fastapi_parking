@@ -1,8 +1,9 @@
-from module_30_ci_linters.homework.hw1.fastapi_parking.app import create_app, db
+from module_30_ci_linters.homework.hw1.fastapi_parking.app import (create_app,
+                                                                   db)
 
 app = create_app()
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     with app.app_context():
         db.create_all()
     app.run(debug=True, port=8000)
