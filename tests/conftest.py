@@ -1,8 +1,8 @@
 from datetime import datetime
 
 import pytest
-from module_30_ci_linters.homework.hw1.fastapi_parking.app import create_app
-from module_30_ci_linters.homework.hw1.fastapi_parking.app.models import (
+from app import create_app
+from app.models import (
     Client,
     ClientParking,
     Parking,
