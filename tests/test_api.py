@@ -1,10 +1,12 @@
 import pytest
 from factories import ClientFactory, ParkingFactory
 
+
 @pytest.mark.parametrize("url", ["/clients", "/clients/1"])
 def test_get_methods(client, url):
     response = client.get(url)
     assert response.status_code == 200
+
 
 def test_create_client(client):
     data = {
@@ -17,11 +19,13 @@ def test_create_client(client):
     assert response.status_code == 201
     assert "id" in response.get_json()
 
+
 def test_create_parking(client):
     data = {"address": "ул. Пушкина, д. 1", "opened": True, "count_places": 10}
     response = client.post("/parkings", json=data)
     assert response.status_code == 201
     assert "id" in response.get_json()
+
 
 @pytest.mark.parking
 def test_enter_parking(client, db, app):
@@ -49,6 +53,7 @@ def test_enter_parking(client, db, app):
     with app.app_context():
         parking = Parking.query.get(parking_id)
         assert parking.count_available_places == 1
+
 
 @pytest.mark.parking
 def test_exit_parking(client, db, app):
@@ -87,6 +92,7 @@ def test_exit_parking(client, db, app):
         ).first()
         assert log.time_out >= log.time_in
 
+
 def test_enter_parking_no_places(client, db):
     client_data = {
         "name": "НетМест",
@@ -107,6 +113,7 @@ def test_enter_parking_no_places(client, db):
     assert response.status_code == 400
     assert "Нет свободных мест" in response.get_json()["error"]
 
+
 def test_exit_parking_no_card(client, db):
     client_data = {"name": "БезКарты", "surname": "БезКартов", "car_number": "X000XX00"}
     client_resp = client.post("/clients", json=client_data)
@@ -125,6 +132,7 @@ def test_exit_parking_no_card(client, db):
     )
     assert response.status_code == 400
     assert "нет привязанной карты" in response.get_json()["error"].lower()
+
 
 def test_create_client_factory(client, db, app):
     client_obj = ClientFactory()
@@ -148,6 +156,7 @@ def test_create_client_factory(client, db, app):
             == 1
         )
 
+
 def test_create_parking_factory(client, db, app):
     parking_obj = ParkingFactory()
     data = {
@@ -162,4 +171,7 @@ def test_create_parking_factory(client, db, app):
     from app.models import Parking
 
     with app.app_context():
-        assert db.session.query(Parking).filter_by(address=parking_obj.address).count() == 1
+        assert (
+            db.session.query(Parking).filter_by(address=parking_obj.address).count()
+            == 1
+        )
