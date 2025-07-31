@@ -1,8 +1,8 @@
 import random
 
 import factory
-from faker import Faker
 from app.models import Client, Parking
+from faker import Faker
 
 fake = Faker("ru_RU")
 
