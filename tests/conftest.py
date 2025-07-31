@@ -3,7 +3,7 @@ from datetime import datetime
 import pytest
 from app import create_app
 from app.models import Client, ClientParking, Parking
-from module_30_ci_linters.homework.hw1.fastapi_parking.app.models import db as _db
+from app.models import db as _db
 
 
 @pytest.fixture
