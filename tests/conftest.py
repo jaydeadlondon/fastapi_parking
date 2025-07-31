@@ -3,9 +3,11 @@ from datetime import datetime
 import pytest
 from module_30_ci_linters.homework.hw1.fastapi_parking.app import create_app
 from module_30_ci_linters.homework.hw1.fastapi_parking.app.models import (
-    Client, ClientParking, Parking)
-from module_30_ci_linters.homework.hw1.fastapi_parking.app.models import \
-    db as _db
+    Client,
+    ClientParking,
+    Parking,
+)
+from module_30_ci_linters.homework.hw1.fastapi_parking.app.models import db as _db
 
 
 @pytest.fixture
