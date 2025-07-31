@@ -2,7 +2,6 @@ import random
 
 import factory
 from faker import Faker
-
 from module_30_ci_linters.homework.hw1.fastapi_parking.app.models import Client, Parking
 
 fake = Faker("ru_RU")

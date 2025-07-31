@@ -31,7 +31,7 @@ jobs:
       run: black --check app tests run.py
 
     - name: Run isort
-      run: isort --check-only app tests run.py
+      run: isort --profile=black --check-only app tests run.py
 
     - name: Run mypy
       run: mypy app
