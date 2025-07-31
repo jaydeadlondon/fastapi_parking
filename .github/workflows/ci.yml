@@ -31,7 +31,7 @@ jobs:
       run: black --check app tests run.py
 
     - name: Run isort
-      run: isort --profile=black --check-only . --skip tests
+      run: isort --profile=black --check-only app run.py
 
     - name: Run mypy
       run: mypy app
@@ -40,4 +40,4 @@ jobs:
       run: pip install -e .
 
     - name: Run tests
-      run: pytest
+      run: PYTHONPATH=$PWD pytest
