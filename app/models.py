@@ -1,9 +1,10 @@
+# mypy: ignore-errors
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
-Model = db.Model  # type: ignore
 
-class Client(Model):
+
+class Client(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
     surname = db.Column(db.String(50), nullable=False)
@@ -14,7 +15,7 @@ class Client(Model):
         return f"<Client {self.name} {self.surname}>"
 
 
-class Parking(Model):
+class Parking(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     address = db.Column(db.String(100), nullable=False)
     opened = db.Column(db.Boolean)
@@ -25,7 +26,7 @@ class Parking(Model):
         return f"<Parking {self.address}>"
 
 
-class ClientParking(Model):
+class ClientParking(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     client_id = db.Column(db.Integer, db.ForeignKey("client.id"))
     parking_id = db.Column(db.Integer, db.ForeignKey("parking.id"))
