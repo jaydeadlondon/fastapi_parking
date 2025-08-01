@@ -1,4 +1,4 @@
-from module_30_ci_linters.homework.hw1.fastapi_parking.app import create_app, db
+from app import create_app, db
 
 app = create_app()
 
