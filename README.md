@@ -13,6 +13,7 @@ FastAPI система управления парковкой с JWT аутен
 
 ### 1. Установка
 ```bash
+git clone https://github.com/jaydeadlondon/fastapi_parking.git
 pip install -r requirements.txt
 ```
 
